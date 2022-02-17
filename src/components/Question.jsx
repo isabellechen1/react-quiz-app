@@ -64,3 +64,20 @@ export default function Question(props) {
         </section>
     )
 }
+
+
+
+
+// <>
+// {!props.submitted ?
+// <span key={answer} onClick={(e) => handleClick(e)}>{decode(answer)}</span> :
+// <span 
+//   key={answer}
+//   className={`submitted 
+//   ${ props.correctAnswer === answer ? 'correct' : ""}
+//   ${ selectedAnswer === answer && props.incorrectAnswers.some(ans => ans === selectedAnswer) ? 'wrong' : ''}
+//   `}
+// >
+//   {decode(answer)}
+// </span>}
+// </>
