@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {decode} from 'html-entities'
-import Questionlist from './Questionlist';
 
 export default function Question(props) {
     const [allAnswers, setAllAnswers] = useState([])
@@ -25,9 +24,6 @@ export default function Question(props) {
           setSelectedAnswer(e.target.outerText)
         }
       }
-  
-    // console.log(selectedAnswer)
-
 
 
 // correct answer -> setscore worked, total score not working
@@ -42,11 +38,22 @@ export default function Question(props) {
     console.log(props.correctAnswer)
     console.log(score)
 
-    const answerElements = allAnswers.map((answer) => {
+    const answerElements = allAnswers.map((answer, index) => {
       return (
-        <span className="select-answer" key={answer} onClick={(e) => {handleClick(e)}}>
-        {`${decode(answer)}`}
-        </span>
+        <>
+        {!props.submitted ?
+        <span key={index} onClick={(e) => handleClick(e)}>{decode(answer)}</span> 
+        :
+        <span 
+          key={index}
+          className={`submitted 
+          ${ props.correctAnswer === answer ? 'correct' : ""}
+          ${ selectedAnswer === answer && props.incorrectAnswers.some(ans => ans === selectedAnswer) ? 'wrong' : ''}
+          `}
+        >
+          {decode(answer)}
+        </span>}
+        </>
       )
     })
 
@@ -57,20 +64,3 @@ export default function Question(props) {
         </section>
     )
 }
-
-
-
-
-// <>
-// {!props.submitted ?
-// <span key={answer} onClick={(e) => handleClick(e)}>{decode(answer)}</span> :
-// <span 
-//   key={answer}
-//   className={`submitted 
-//   ${ props.correctAnswer === answer ? 'correct' : ""}
-//   ${ selectedAnswer === answer && props.incorrectAnswers.some(ans => ans === selectedAnswer) ? 'wrong' : ''}
-//   `}
-// >
-//   {decode(answer)}
-// </span>}
-// </>
