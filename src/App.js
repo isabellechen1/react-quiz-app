@@ -22,10 +22,6 @@ function App() {
     getQuizData()
 }, [])
 
-  // useEffect(() => {
-  //   localStorage.setItem("questionData", JSON.stringify(questionData))
-  // }, [questionData])
-
   function quizStart(){
     setStarted(true)
   }
@@ -33,10 +29,15 @@ function App() {
 
   return( 
     <main className='start-page'>
-      <Questionlist 
-        questionData={questionData}
-        started={started}
-        quizStart={quizStart}/>
+      {!started ? (
+        <Welcome quizStart={quizStart} />
+      ):(
+        <Questionlist 
+          questionData={questionData}
+          quizStart={quizStart}
+          started={started}/>
+      )
+      }
     </main>
   )
 }
@@ -44,14 +45,7 @@ function App() {
 export default App;
 
 
-// {!started ? (
-//   <Welcome quizStart={quizStart} />
-// ):(
-//   <Questionlist 
-//     questionData={questionData}
-//     quizStart={quizStart}/>
-// )
-// }
+
 
 
 
